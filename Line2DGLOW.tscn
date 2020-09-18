@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.513661, 1 )
+colors = PoolColorArray( 1.5, 0, 0, 1, 1.5, 1.5, 0, 1, 0, 1.5, 0, 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 4
+glow_enabled = true
+glow_blend_mode = 0
+glow_bicubic_upscale = true
+
+[node name="Line2D" type="Line2D"]
+position = Vector2( 0, 55 )
+points = PoolVector2Array( 160.223, 192.687, 162.871, 209.108, 177.704, 222.352, 200.482, 221.822, 229.618, 204.871, 235.445, 179.973, 222.201, 160.373, 205.78, 146.6, 185.12, 138.124, 132.412, 151.138, 40.3078, 147.133, -1.0722, 120.436, 20.8391, 69.3271, 56, 32, 120, 24, 159.374, 27.0094, 204.81, 51.9546, 259.155, 49.7273, 165.547, -32.3228, 336.642, 31.002, 425.76, 42.744, 478.511, 88.6253, 485.736, 46.5492, 492.004, 10.049, 485.655, 46.5592, 601.535, 10.049, 530.347, 88.9031, 548.566, 100.687, 577.491, 128.189, 587.593, 278.599 )
+width = 20.0
+gradient = SubResource( 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )

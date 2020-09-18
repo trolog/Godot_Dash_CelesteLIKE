@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Testing_whip.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 0.67, 1.23, 0, 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "New Anim"
+length = 0.5
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("whip:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.04, 0.07, 0.11, 0.12 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ PoolVector2Array( 62.2432, 65.4463, 98.2026, 45.9683, 116.557, 44.0954, 125.172, 61.7005, 109.065, 70.6904, 85.8415, 72.1887 ), PoolVector2Array( 62.2432, 65.4463, 100.075, 54.9582, 119.928, 43.7209, 137.908, 59.8277, 129.667, 74.0616, 99.3263, 88.2955 ), PoolVector2Array( 62.2432, 65.4463, 101.948, 64.3226, 125.921, 51.2124, 154.389, 57.9548, 171.994, 77.8073, 185.104, 98.4091 ), PoolVector2Array( 62.2432, 65.4463, 101.948, 64.3226, 136.409, 59.8277, 163.004, 60.9514, 189.974, 66.57, 219.94, 80.804 ), PoolVector2Array( 62.2432, 65.4463, 101.948, 64.3226, 137.908, 64.6972, 165.626, 63.5734, 194.843, 63.948, 226.682, 64.6972 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "whip"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 3,
+"values": [ PoolVector2Array( 91.1239, 33.1591, 84.9686, 53.0853, 104.821, 56.831, 128.794, 48.5903, 124.299, 30.6107, 106.32, 18.9988 ), PoolVector2Array( 91.1239, 33.1591, 102.199, 50.0887, 124.299, 52.7107, 146.025, 44.0954, 146.399, 28.3632, 129.543, 5.8886 ) ]
+}
+
+[sub_resource type="Environment" id=4]
+background_mode = 4
+glow_enabled = true
+glow_blend_mode = 0
+
+[node name="Testing_whip" type="Node2D"]
+position = Vector2( 164.5, 101 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="whip" type="Line2D" parent="."]
+position = Vector2( -61, -65 )
+points = PoolVector2Array( 62.2432, 65.4463, 98.2026, 45.9683, 116.557, 44.0954, 125.172, 61.7005, 109.065, 70.6904, 85.8415, 72.1887 )
+width = 2.929
+gradient = SubResource( 1 )
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 20.0
+round_precision = 15
+antialiased = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 3 )
+anims/whip = SubResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )

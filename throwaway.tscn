@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Line2DGLOW.tscn" type="PackedScene" id=1]
+[ext_resource path="res://rigidball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rigidball.gd" type="Script" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Line2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( -15, 58 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2( 79, 31 )
+node_a = NodePath("ball")
+node_b = NodePath("ball2")
+
+[node name="ball" parent="PinJoint2D" instance=ExtResource( 2 )]
+position = Vector2( -5, 0 )
+script = ExtResource( 3 )
+
+[node name="ball2" parent="PinJoint2D" instance=ExtResource( 2 )]
+position = Vector2( -7, 7 )

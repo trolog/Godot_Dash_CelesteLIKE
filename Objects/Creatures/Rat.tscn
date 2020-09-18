@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Objects/Parents/Creature.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Animations/Rat.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scripts/Creatures/Rat.gd" type="Script" id=12]
+
+[node name="Rat" instance=ExtResource( 1 )]
+collision_layer = 2147483654
+collision_mask = 2147483654
+script = ExtResource( 12 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, 4 )
+
+[node name="right_ray" parent="." index="1"]
+cast_to = Vector2( 0, 2 )
+
+[node name="left_ray" parent="." index="2"]
+cast_to = Vector2( 0, 2 )
+
+[node name="AnimatedSprite" parent="." index="3"]
+frames = ExtResource( 2 )
+animation = "IDLE"
+frame = 1
+playing = true

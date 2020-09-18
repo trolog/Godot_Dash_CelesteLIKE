@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Animations/Player.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Objects/Footstep.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/dash_particle.png" type="Texture" id=3]
+[ext_resource path="res://Objects/dash_sprite.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.005, 13 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 6 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0397727 ), -3.35353, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 7.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 19.0
+angular_velocity = -200.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 11 )
+foot_step = ExtResource( 2 )
+dash_object = ExtResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "IDLE"
+playing = true
+
+[node name="stand_shape" type="CollisionShape2D" parent="."]
+position = Vector2( -0.005, 5 )
+shape = SubResource( 1 )
+
+[node name="slide_shape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 12 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="raycats" type="Position2D" parent="."]
+position = Vector2( 0, 18 )
+
+[node name="ground_ray" type="RayCast2D" parent="raycats"]
+position = Vector2( -4, 1 )
+enabled = true
+cast_to = Vector2( 8, 0 )
+collision_mask = 2
+collide_with_areas = true
+
+[node name="right_ray" type="RayCast2D" parent="raycats"]
+position = Vector2( 11, -26 )
+enabled = true
+cast_to = Vector2( 0, 26 )
+collision_mask = 2
+
+[node name="left_ray" type="RayCast2D" parent="raycats"]
+position = Vector2( -11, -26 )
+enabled = true
+cast_to = Vector2( 0, 26 )
+collision_mask = 2
+
+[node name="wallslide_right_ray" type="RayCast2D" parent="raycats"]
+position = Vector2( 5, -25 )
+enabled = true
+cast_to = Vector2( 0, 6 )
+collision_mask = 2
+
+[node name="wallslide_left_ray" type="RayCast2D" parent="raycats"]
+position = Vector2( -5, -25 )
+enabled = true
+cast_to = Vector2( 0, 6 )
+collision_mask = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+
+[node name="dash_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="dash_particles" type="Particles2D" parent="."]
+emitting = false
+amount = 80
+local_coords = false
+process_material = SubResource( 5 )
+texture = ExtResource( 3 )
